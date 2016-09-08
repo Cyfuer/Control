@@ -30,11 +30,15 @@ float const nav_barItem_titleFont = 16;
 #pragma mark  -  导航栏
 
 - (void)hideNav {
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    if (!self.navigationController.navigationBarHidden) {
+        [self.navigationController setNavigationBarHidden:YES animated:YES];
+    }
 }
 
 - (void)showNav {
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    if (self.navigationController.navigationBarHidden) {
+        [self.navigationController setNavigationBarHidden:NO animated:YES];
+    }
 }
 
 - (void)setBackBtn {
@@ -53,6 +57,7 @@ float const nav_barItem_titleFont = 16;
                                        target:nil action:nil];
     negativeSpacer.width =  nav_barItem_horizontalMargin;
     
+    // 返回按钮
     UIButton *backBtn = [[UIButton alloc]init];
     backBtn.frame = CGRectMake(0, 0, 44, 44);
     backBtn.imageView.contentMode = UIViewContentModeCenter;
